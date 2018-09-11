@@ -39,9 +39,12 @@ sess.run(tf.global_variables_initializer())         # initialize var in graph
 
 plt.ion()   # something about plotting
 
-for step in range(100):
+writer = tf.summary.FileWriter('./log', sess.graph)     # write to file
+merge_op = tf.summary.merge_all()                       # operation to merge all summary
+
+for step in range(1000):
     # train and net output
-    _, l, pred = sess.run([train_op, loss, output], {tf_x: x, tf_y: y})
+    _, l, pred, opresult = sess.run([train_op, loss, output, merge_op], {tf_x: x, tf_y: y})
     if step % 5 == 0:
         # plot and show learning process
         plt.cla()
@@ -49,6 +52,7 @@ for step in range(100):
         plt.plot(x, pred, 'r-', lw=5)
         plt.text(0.5, 0, 'Loss=%.4f' % l, fontdict={'size': 20, 'color': 'red'})
         plt.pause(0.1)
+        writer.add_summary(opresult, step)
 
 plt.ioff()
 plt.show()

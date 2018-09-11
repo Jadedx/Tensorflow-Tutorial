@@ -36,7 +36,7 @@ sess = tf.Session()
 # need to initialize the iterator in this case
 sess.run([iterator.initializer, tf.global_variables_initializer()], feed_dict={tfx: npx_train, tfy: npy_train})
 
-for step in range(201):
+for step in range(1000):
   try:
     _, trainl = sess.run([train, loss])                       # train
     if step % 10 == 0:

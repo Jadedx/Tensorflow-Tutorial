@@ -24,7 +24,7 @@ with tf.Session() as sess:
         [z1, z2],       # run them together
         feed_dict={
             x1: 1, y1: 2,
-            x2: [[2], [2]], y2: [[3, 3]]
+            x2: [[1], [2]], y2: [[3, 4]]
         })
     print(z1_value)
     print(z2_value)
